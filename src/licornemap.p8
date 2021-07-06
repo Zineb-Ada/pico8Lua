@@ -5,6 +5,7 @@ __lua__
 function _init()
 	title_screen()
  create_player()
+ init_msg()
  enemies={}
  gen_enemies()
  friends={}
@@ -13,11 +14,15 @@ function _init()
  rainbows={}
  gen_rainbow()
  scene="menu"
+ 
 end
 
 function _update()
+	--if not messages{1} then
  player_movement()
+-- end
  check_flag()
+ update_msg()
  update_camera()
  enemy_movement()
  rainbow_movement()
@@ -50,6 +55,7 @@ function _draw()
 	spr(88,s.x*8,s.y*8)
  end
  draw_ui()
+ draw_msg()
  
 end
 
@@ -115,11 +121,14 @@ function player_movement()
 	end
 end
 
---permet de rcup les keys
+--permet de rcup les keys et dialogue
 function interact(x,y)
  if check_flag(1,x,y) then
   pick_up_key(x,y)
  end
+	if x==8 and y==9 then
+	create_msg("ennemy","i'm a sexist bastard")
+	end
 end
 
 
@@ -285,6 +294,35 @@ function print_outline(text,x,y)
 	print(text,x,y+1,0)
 	print(text,x,y,7)
 end
+-->8
+--messages
+
+function init_msg()
+    messages={}
+end
+ 
+function create_msg(name,...)
+    msg_title=name
+    messages={...}
+end
+
+function draw_msg()
+    if messages[1] then
+        local y = 100 
+rectfill(6,y,6+#msg_title*4,y+6,2)        
+print (msg_title,7,y+1,5) 
+rectfill(2,y+7,125,y+20,4)
+rect(2,y+7,125,y+20,2)        
+print(messages[1],3,y+10,8)
+    end
+end
+
+function update_msg()
+    if btn((❎)) then
+        deli(messages,1)
+				end        
+end
+
 __gfx__
 00000000000000000000000000000000000000003333333333333333000000005555555555555555555555555555555533333333333333333333333333333333
 000000000000000000000000555555555555500033333333a3a33333000000005555555555555555555555559555555577777777777773337777777777777333
