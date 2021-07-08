@@ -1,7 +1,7 @@
 pico-8 cartridge // http://www.pico-8.com
 version 32
 __lua__
---jeu des licornes
+--unicorn quest
 
 function _init()
 	scene="menu"
