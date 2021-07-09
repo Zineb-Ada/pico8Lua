@@ -416,7 +416,7 @@ update_sparkles()
 -- winner page
 end_game=false
 function score_text()
-    if ez.score == 10 then
+    if ez.score >=1 then
     end_game=true
     end
 end
